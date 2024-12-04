@@ -32,7 +32,7 @@ def streaming_weather_timer(mytimer: func.TimerRequest):
 
         # Crear un productor para enviar los datos a Event Hub
         event_hub_conn_str = os.getenv('EVENT_HUB_CONNECTION_STRING')
-        event_hub_name = "weatherNamespaceCarlos"  # Nombre del Event Hub definido en Azure
+        event_hub_name = "weather-data"  # Nombre del Event Hub definido en Azure
 
         producer = EventHubProducerClient.from_connection_string(conn_str=event_hub_conn_str, eventhub_name=event_hub_name)
         
