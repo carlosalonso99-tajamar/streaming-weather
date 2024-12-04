@@ -9,7 +9,7 @@ from azure.eventhub import EventHubProducerClient, EventData
 app = func.FunctionApp()
 
 # Trigger del Timer, se ejecutará cada 5 minutos
-@app.timer_trigger(arg_name="mytimer", schedule="*/5 * * * *")  # Cada 5 minutos
+@app.timer_trigger(arg_name="mytimer", schedule="*/5 * * * * *")  # Cada 5 segundos
 def streaming_weather_timer(mytimer: func.TimerRequest):
     logging.info('Python Timer trigger function ran at %s', mytimer.schedule_status.last)
 
@@ -45,7 +45,7 @@ def streaming_weather_timer(mytimer: func.TimerRequest):
         logging.error(f"Error al obtener los datos de OpenWeatherMap: {response.status_code}")
 
 # Trigger del Event Hub, procesará los eventos recibidos
-@app.event_hub_message_trigger(arg_name="azeventhub", event_hub_name="weatherNamespaceCarlos",
+@app.event_hub_message_trigger(arg_name="azeventhub", event_hub_name="weather-data",
                                connection="EVENT_HUB_CONNECTION_STRING") 
 def streaming_weather_trigger(azeventhub: func.EventHubEvent):
     logging.info('Python EventHub trigger processed an event: %s',
