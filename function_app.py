@@ -8,7 +8,7 @@ from azure.eventhub import EventHubProducerClient, EventData
 # Crear una instancia de la aplicación de funciones
 app = func.FunctionApp()
 
-# Trigger del Timer, se ejecutará cada 5 minutos
+# Trigger del Timer, se ejecutará cada 5 segundos
 @app.timer_trigger(arg_name="mytimer", schedule="*/5 * * * * *")  # Cada 5 segundos
 def streaming_weather_timer(mytimer: func.TimerRequest):
     logging.info('Python Timer trigger function ran at %s', mytimer.schedule_status.last)
